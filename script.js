@@ -7,8 +7,8 @@ const genrateNewCard = (taskdata) =>
   `<div id=${taskdata.id} class="col-md-6 col-lg-4">
       <div class="card">
       <div class="card-header d-flex justify-content-end gap-2">
-        <button type="button" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></button>
-        <button type="button" class="btn btn-outline-danger" id=${taskdata.id} onclick="deletecard.apply(this,arguments)" ><i class="fa-solid fa-trash" id=${taskdata.id} onclick="deletecard.apply(this,arguments)"></i></button>
+        <button type="button" class="btn btn-outline-success" id=${taskdata.id} onclick="editcard.apply(this,arguments)" ><i class="fa-solid fa-pen" id=${taskdata.id} onclick="editcard.apply(this,arguments)" ></i></button>
+        <button type="button" class="btn btn-outline-danger" id=${taskdata.id} onclick="deletecard.apply(this,arguments)" ><i class="fa-solid fa-trash" id=${taskdata.id} onclick="deletecard.apply(this,arguments)" ></i></button>
       </div>
       <div class="p-3">
         <img src=${taskdata.imageurl} class="card-img-top" alt="Image">
@@ -60,6 +60,25 @@ const loadIntialData = () => {
         return taskContainer.removeChild(event.target.parentNode.parentNode.parentNode.parentNode);
       }
     };
+
+//Edit function
+const editcard = (event) => {
+  event = window.event;
+  const targetID = event.taget.id;
+  const tagname = event.target.tagName;
+
+  globalstore = globalstore.filter((cardObject) => cardObject.id !== targetID);
+  localStorage = setItem("Tasky",JSON.stringify({cards : globalstore}));
+
+
+  if(tagname === "BUTTON")
+  {
+    return taskContainer.contentEditable();
+  }
+  else {
+    return taskContainer.contentEditable();
+  }
+}
 
 
 const saveChanges = () => {
