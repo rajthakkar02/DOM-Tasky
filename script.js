@@ -73,12 +73,12 @@ const editcard = (event) => {
 
   if(tagname === "BUTTON")
   {
-    return taskContainer.contentEditable();
+    return taskContainer.replaceChild();
   }
   else {
-    return taskContainer.contentEditable();
+    return taskContainer.replaceChild();
   }
-}
+};
 
 
 const saveChanges = () => {
